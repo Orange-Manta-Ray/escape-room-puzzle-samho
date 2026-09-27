@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#111311" />
+    <meta name="description" content="삼호 방탈출 첫 번째 문제" />
+    <title>삼호 방탈출 — 문제 01</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+
+    <main class="case-file">
+      <header class="case-header">
+        <div>
+          <p class="eyebrow">SAMHO ESCAPE ARCHIVE</p>
+          <h1>사라진 숫자</h1>
+        </div>
+        <div class="case-number" aria-label="첫 번째 문제">
+          <span>CASE</span>
+          <strong>01</strong>
+        </div>
+      </header>
+
+      <section class="puzzle-section" aria-labelledby="puzzle-heading">
+        <div class="section-label">
+          <span class="label-index">01</span>
+          <div>
+            <h2 id="puzzle-heading">문제를 해독하세요</h2>
+            <p>규칙을 찾아 물음표에 들어갈 숫자를 입력하세요.</p>
+          </div>
+        </div>
+
+        <figure class="evidence">
+          <div class="evidence-tape tape-left" aria-hidden="true"></div>
+          <div class="evidence-tape tape-right" aria-hidden="true"></div>
+          <img src="assets/puzzle.png" alt="월요일, 화요일, 수요일의 숫자 규칙을 보고 목요일의 숫자를 찾는 문제" />
+          <figcaption>수집된 기록 · 매직 다이어리</figcaption>
+        </figure>
+      </section>
+
+      <section class="answer-section" aria-labelledby="answer-heading">
+        <div class="answer-copy">
+          <p class="answer-kicker">ACCESS CODE</p>
+          <h2 id="answer-heading">해답을 입력하세요</h2>
+        </div>
+
+        <form id="answer-form" novalidate>
+          <label class="sr-only" for="answer-input">정답 숫자</label>
+          <div class="input-row">
+            <input
+              id="answer-input"
+              name="answer"
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              maxlength="2"
+              autocomplete="off"
+              placeholder="?"
+              aria-describedby="result-message"
+              autofocus
+            />
+            <button type="submit">
+              <span>확인</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14M14 6l6 6-6 6" />
+              </svg>
+            </button>
+          </div>
+          <p id="result-message" class="result-message" aria-live="polite">숫자를 입력한 뒤 확인을 눌러주세요.</p>
+        </form>
+      </section>
+
+      <section id="success-panel" class="success-panel" aria-labelledby="success-heading" hidden>
+        <div class="success-stamp" aria-hidden="true">SOLVED</div>
+        <div class="success-heading">
+          <span class="check-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="m5 12 4.2 4L19 6.5" /></svg>
+          </span>
+          <div>
+            <p>CASE 01 · COMPLETE</p>
+            <h2 id="success-heading">정답입니다</h2>
+          </div>
+        </div>
+        <div class="answer-reveal">
+          <img src="assets/answer.png" alt="정답을 맞힌 것을 축하하는 이미지" />
+        </div>
+        <p class="success-note">이 화면을 진행요원에게 보여주세요.</p>
+      </section>
+
+      <footer>
+        <span>SAMHO</span>
+        <span aria-hidden="true">◆</span>
+        <span>ESCAPE PROJECT</span>
+      </footer>
+    </main>
+  </body>
+</html>
