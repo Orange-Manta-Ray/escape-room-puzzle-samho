@@ -68,12 +68,13 @@
               aria-describedby="result-message"
               autofocus
             />
-            <button type="submit">
+            <label class="submit-control">
+              <input class="haptic-switch" type="checkbox" switch aria-label="정답 확인" />
               <span>확인</span>
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M5 12h14M14 6l6 6-6 6" />
               </svg>
-            </button>
+            </label>
           </div>
           <p id="result-message" class="result-message" aria-live="polite">숫자를 입력한 뒤 확인을 눌러주세요.</p>
         </form>
@@ -112,12 +113,13 @@
                 placeholder="글씨 5글자"
                 aria-describedby="clue-message"
               />
-              <button type="submit">
+              <label class="submit-control">
+                <input class="haptic-switch" type="checkbox" switch aria-label="두 번째 정답 확인" />
                 <span>확인</span>
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M5 12h14M14 6l6 6-6 6" />
                 </svg>
-              </button>
+              </label>
             </div>
             <p id="clue-message" class="result-message" aria-live="polite">띄어쓰기는 채점에 영향을 주지 않습니다.</p>
           </form>

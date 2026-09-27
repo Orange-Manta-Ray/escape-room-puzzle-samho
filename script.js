@@ -12,6 +12,12 @@ const finalPanel = document.querySelector("#final-panel");
 const CORRECT_ANSWER = "6";
 const CORRECT_CLUE = "정답입니다";
 
+document.querySelectorAll(".haptic-switch").forEach((control) => {
+  control.addEventListener("change", () => {
+    control.closest("form").requestSubmit();
+  });
+});
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -74,7 +80,7 @@ function showError(text) {
 }
 
 function showSuccess() {
-  form.querySelector("button").disabled = true;
+  form.querySelector(".haptic-switch").disabled = true;
   input.disabled = true;
   message.classList.remove("is-error");
   message.textContent = "인증 완료";
@@ -91,7 +97,7 @@ function showSuccess() {
 }
 
 function showFinalAnswer() {
-  clueForm.querySelector("button").disabled = true;
+  clueForm.querySelector(".haptic-switch").disabled = true;
   clueInput.disabled = true;
   clueMessage.classList.remove("is-error");
   clueMessage.textContent = "두 번째 잠금 해제 완료";

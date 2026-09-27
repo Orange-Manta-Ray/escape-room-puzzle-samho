@@ -232,7 +232,7 @@ h1 {
 }
 
 input,
-button {
+.submit-control {
   font: inherit;
 }
 
@@ -253,7 +253,8 @@ input::placeholder {
   color: #5f625c;
 }
 
-button {
+.submit-control {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -271,17 +272,38 @@ button {
   transition: transform 150ms ease, background-color 150ms ease;
 }
 
-button:active {
+.submit-control:active {
   transform: translateY(1px);
   background: var(--signal-dark);
 }
 
-button svg {
+.submit-control svg {
   width: 17px;
   fill: none;
   stroke: currentColor;
   stroke-linecap: square;
   stroke-width: 1.8;
+}
+
+.haptic-switch {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  appearance: auto;
+  -webkit-appearance: auto;
+  cursor: pointer;
+}
+
+.haptic-switch:disabled {
+  cursor: default;
+}
+
+.submit-control:has(.haptic-switch:disabled) {
+  opacity: 0.62;
 }
 
 .result-message {
