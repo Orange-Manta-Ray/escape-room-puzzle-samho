@@ -374,6 +374,68 @@ button svg {
   text-align: center;
 }
 
+.follow-up {
+  display: grid;
+  grid-template-columns: minmax(175px, 0.9fr) 1.1fr;
+  gap: 28px;
+  align-items: end;
+  margin-top: 34px;
+  padding-top: 32px;
+  border-top: 1px dashed rgba(232, 228, 216, 0.24);
+}
+
+.follow-up h3 {
+  margin: 0;
+  font-family: "Gowun Batang", serif;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+#clue-input {
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-size: 1.12rem;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+#clue-input::placeholder {
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.final-panel {
+  margin-top: 36px;
+  padding-top: 34px;
+  border-top: 1px solid rgba(213, 199, 106, 0.35);
+}
+
+.final-panel.is-visible {
+  animation: reveal 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.final-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.final-label span {
+  color: var(--success);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.final-label strong {
+  font-family: "Gowun Batang", serif;
+  font-size: 1.15rem;
+}
+
+.final-reveal {
+  transform: rotate(-0.45deg);
+}
+
 .success-stamp {
   position: absolute;
   top: 32px;
@@ -434,6 +496,11 @@ footer {
   }
 
   .answer-section {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .follow-up {
     grid-template-columns: 1fr;
     gap: 18px;
   }

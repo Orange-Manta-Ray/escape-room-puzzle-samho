@@ -93,7 +93,46 @@
         <div class="answer-reveal">
           <img src="assets/answer.png" alt="정답을 맞힌 것을 축하하는 이미지" />
         </div>
-        <p class="success-note">이 화면을 진행요원에게 보여주세요.</p>
+
+        <div class="follow-up">
+          <div class="follow-up-copy">
+            <p class="answer-kicker">SECOND LOCK</p>
+            <h3>위 사진에 있는 글씨 5글자를 있는대로 쓰세요.</h3>
+          </div>
+
+          <form id="clue-form" novalidate>
+            <label class="sr-only" for="clue-input">사진 속 글씨 5글자</label>
+            <div class="input-row clue-input-row">
+              <input
+                id="clue-input"
+                name="clue"
+                type="text"
+                maxlength="8"
+                autocomplete="off"
+                placeholder="글씨 5글자"
+                aria-describedby="clue-message"
+              />
+              <button type="submit">
+                <span>확인</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 12h14M14 6l6 6-6 6" />
+                </svg>
+              </button>
+            </div>
+            <p id="clue-message" class="result-message" aria-live="polite">띄어쓰기는 채점에 영향을 주지 않습니다.</p>
+          </form>
+        </div>
+
+        <div id="final-panel" class="final-panel" hidden>
+          <div class="final-label">
+            <span>UNLOCKED</span>
+            <strong>최종 단서</strong>
+          </div>
+          <div class="answer-reveal final-reveal">
+            <img src="assets/answer-1-1.png" alt="두 번째 정답 이미지" />
+          </div>
+          <p class="success-note">이 화면을 진행요원에게 보여주세요.</p>
+        </div>
       </section>
 
       <footer>
