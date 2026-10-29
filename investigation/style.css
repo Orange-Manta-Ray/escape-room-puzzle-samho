@@ -59,8 +59,6 @@ figure { margin: 0 0 26px; background: #f4f2e9; border: 5px solid #e8e4d7; box-s
 figure a { display: block; line-height: 0; }
 figure img { display: block; width: 100%; height: auto; }
 figcaption { padding: 12px 12px 10px; font-size: 13px; font-weight: 700; color: #33352e; line-height: 1.5; }
-.download { display: block; margin: 0 12px 12px; padding: 11px 14px; border: 1px solid #494941; border-radius: 2px; background: #242520; color: #fff; text-align: center; text-decoration: none; font-size: 14px; font-weight: 700; line-height: 1.5; }
-.download:hover, .download:focus-visible { background: #414238; outline: 3px solid var(--yellow); outline-offset: 2px; }
 .answer { padding-top: 12px; padding-bottom: 30px; }
 .question { font-size: 20px; font-weight: 750; line-height: 1.5; margin: 5px 0 20px; word-break: keep-all; }
 label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 7px; }
@@ -79,9 +77,4 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
 footer { border-top: 1px solid #505047; padding: 20px clamp(18px, 5vw, 40px); display: flex; justify-content: space-between; gap: 12px; font-size: 10px; letter-spacing: .08em; color: #a5a599; font-weight: 700; }
 [hidden] { display: none !important; }
 
-.photo-share { display: block; width: calc(100% - 24px); margin: 0 12px 8px; padding: 11px 14px; background: #f2cd36; color: #171717; font-size: 14px; line-height: 1.5; }
-.save-hint { margin: 0 12px 12px; color: #4f514b; font-size: 13px; line-height: 1.5; }
 
-.cover { position: relative; padding: 20px 18px 0; background: radial-gradient(ellipse at center, #38362d 0, #171717 68%); text-align: center; }
-.cover::after { content: ""; display: block; height: 3px; max-width: 480px; margin: -3px auto 0; position: relative; background: #e9c62f; }
-.cover img { display: block; width: 100%; max-width: 360px; height: auto; margin: 0 auto; box-shadow: 0 9px 28px #000a; }
