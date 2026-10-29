@@ -1,0 +1,23 @@
+:root { color-scheme: light; --white: #252822; --muted: #5c6058; }
+body { background: #dedbd2; color: #252822; }
+.file { background-color: #f4f2ec; background-image: linear-gradient(#faf9f2ed, #f4f2eceb), url("../assets/investigation-background.jpg"); box-shadow: 0 0 50px #4c443225; }
+.masthead { background: #f7f5eded; border-bottom-color: #b9b3a1; }
+.overline { color: #666a5f; }
+.seal { color: #685719; border-color: #9b8a50; }
+.intro, .section-head { text-shadow: none; }
+.tag { color: #6b5615; background: #fcf9e9; border-color: #ad9853; }
+.section-head { border-color: #ada793; }
+.section-head span, .result .section-head span { color: #79601b; }
+figure { box-shadow: 0 6px 20px #3a342521; }
+.answer, .result { padding-bottom: 30px; }
+.question { color: #272b25; }
+input { border-color: #8c9183; }
+#message, .stage-message { color: #5c6058; font-size: 14px; margin: 9px 0 0; }
+.error { color: #a53224 !important; }
+.result .section-head { border-top-color: #9d8431; }
+footer { color: #666b5f; border-color: #bdbbaa; }
+.lock { text-align: center; margin: 0 0 20px; }
+.lock img { width: min(100%, 340px); height: auto; }
+.stage-form label { color: #444b3f; }
+.stage-form button:disabled { background: #d7d4c6; color: #4c5146; cursor: default; }
+.stage-form input:disabled { background: #ecece4; color: #50564c; }
