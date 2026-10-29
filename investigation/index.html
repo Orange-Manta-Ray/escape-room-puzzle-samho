@@ -6,14 +6,15 @@
   <meta name="theme-color" content="#111111">
   <title>삼호 사건 기록</title>
   <link rel="stylesheet" href="style.css?v=7">
-  <script src="case.js?v=3" defer></script>
+  <script src="case.js?v=4" defer></script>
 </head>
 <body>
   <main class="file">
     <header class="masthead"><div><span class="overline">SAMHO · INVESTIGATION FILE</span><p>삼호 사건 기록</p></div><span class="seal">EVIDENCE<br><b id="case-number">00</b></span></header>
     <div class="police-cordon" aria-hidden="true"><span class="police-tape tape-back">POLICE LINE · DO NOT CROSS · POLICE LINE · DO NOT CROSS · POLICE LINE · DO NOT CROSS</span><span class="police-tape tape-front">POLICE LINE · DO NOT CROSS · POLICE LINE · DO NOT CROSS · POLICE LINE · DO NOT CROSS</span></div>
     <section class="intro"><p class="tag">현장 증거 자료</p><h1 id="title"></h1><p id="intro"></p></section>
-    <section aria-labelledby="evidence-title"><div class="section-head"><span>01 / EVIDENCE</span><h2 id="evidence-title">확보된 자료</h2><p>사진을 누르면 원본을 크게 볼 수 있습니다.</p></div><div id="evidence"></div></section>
+    <section id="entry-section" class="answer" hidden aria-labelledby="entry-title"><div class="section-head"><span>ENTRY / ACCESS CODE</span><h2 id="entry-title">지도 속 단서를 확인하세요</h2></div><div id="entry-evidence"></div><form id="entry-form"><label for="entry-input">정답 입력</label><div class="answer-row"><input id="entry-input" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="정답을 입력하세요" aria-describedby="entry-message"><button type="submit">확인 →</button></div><p id="entry-message" class="stage-message" role="status" aria-live="polite">정답을 입력하고 확인을 눌러주세요.</p></form></section>
+    <section id="puzzle-section" aria-labelledby="evidence-title"><div class="section-head"><span>01 / EVIDENCE</span><h2 id="evidence-title">확보된 자료</h2><p>사진을 누르면 원본을 크게 볼 수 있습니다.</p></div><div id="evidence"></div></section>
     <section id="answer-section" class="answer" hidden><div class="section-head"><span>02 / INVESTIGATION</span><h2>단서를 확인하세요</h2></div><p id="question" class="question"></p><form id="form"><label for="answer-input">정답 입력</label><div class="answer-row"><input id="answer-input" autocomplete="off"><button type="submit">확인 <span aria-hidden="true">→</span></button></div><p id="message" role="status" aria-live="polite">정답을 입력하고 확인을 눌러주세요.</p></form></section>
     <section id="result" class="result" hidden aria-live="polite"><div class="section-head"><span>ACCESS GRANTED</span><h2>정답입니다</h2><p>새로운 자료가 확보되었습니다.</p></div><div id="result-evidence"></div></section>
     <footer><span>SAMHO INVESTIGATION</span><span>예배를 지켜라 · 사건 기록</span></footer>

@@ -1,5 +1,5 @@
 const cases = {
-  '1': { title: '지도에 남겨진 기록', intro: '흩어진 기록 속에서 다음 단서를 찾아보세요.', evidence: [['diary-1024.png', '문제 1-1 · 일기'], ['diary-0904.png', '문제 1-2 · 일기']], question: '일기는 날짜 순으로 봐야한다.', answer: '5122', numeric: true, result: ['navigation.png', '문제 1 정답 · 네비게이션 기록'] },
+  '1': { gate: { image: ['route-real.png', '확보된 자료 · 대피 경로'], answer: 'confidential' }, title: '지도에 남겨진 기록', intro: '흩어진 기록 속에서 다음 단서를 찾아보세요.', evidence: [['diary-1024.png', '문제 1-1 · 일기'], ['diary-0904.png', '문제 1-2 · 일기']], question: '일기는 날짜 순으로 봐야한다.', answer: '5122', numeric: true, result: ['navigation.png', '문제 1 정답 · 네비게이션 기록'] },
   '2': { title: '삼호 성도 리스트', intro: '성도 리스트를 살펴보고 질문에 답하세요.', evidence: [['people-question.jpg', '문제 2 · 삼호 성도 리스트']], question: '예수님이 가장 먼저 부르신 제자는 누구인가?', answer: '안드레', result: ['people-answer.png', '문제 2 정답 · 성도 리스트'] },
   '3': { title: '영수증 모음', intro: '현장에서 확보한 영수증을 자세히 살펴보세요.', evidence: [['receipts.png', '증거 자료 · 영수증 모음']] },
   '4': { title: '틀린 지도', intro: '아직 확인되지 않은 기록입니다.', evidence: [], question: '임시01', answer: '임시01', result: ['route.png', '확보된 자료 · 대피 경로'] },
@@ -34,6 +34,34 @@ if (!data) {
   $('#case-number').textContent = id.padStart(2, '0');
   $('#title').textContent = data.title;
   $('#intro').textContent = data.intro;
+  if (data.gate) {
+    $('#puzzle-section').hidden = true;
+    $('#entry-section').hidden = false;
+    addEvidence($('#entry-evidence'), data.gate.image);
+    let unlocked = false;
+    $('#entry-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (unlocked) return;
+      const value = $('#entry-input').value.normalize('NFC').trim().toLowerCase();
+      if (value !== data.gate.answer) {
+        $('#entry-message').textContent = value ? '정답이 아닙니다. 다시 확인해 주세요.' : '정답을 먼저 입력해 주세요.';
+        $('#entry-message').classList.add('error');
+        return;
+      }
+      unlocked = true;
+      $('#entry-input').disabled = true;
+      $('#entry-form').querySelector('button').disabled = true;
+      $('#entry-message').classList.remove('error');
+      $('#entry-message').textContent = '인증 완료. 다음 기록을 확인하세요.';
+      $('#puzzle-section').hidden = false;
+      renderPuzzle();
+      $('#puzzle-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  } else {
+    renderPuzzle();
+  }
+}
+function renderPuzzle() {
   data.evidence.forEach((item) => addEvidence($('#evidence'), item));
   if (!data.evidence.length) $('#evidence-title').parentElement.parentElement.hidden = true;
   if (data.answer) {
