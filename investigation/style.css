@@ -38,10 +38,12 @@ body {
 .overline { color: #a6a59a; }
 .seal { border: 1px solid #a89958; color: var(--yellow); text-align: center; padding: 6px 12px; font-size: 9px; line-height: 1.25; letter-spacing: .12em; }
 .seal b { font-size: 22px; }
-.case-strip { display: flex; justify-content: space-between; gap: 12px; padding: 9px clamp(20px, 5vw, 40px); border-bottom: 1px solid #827448; background: #171713e8; color: #d6c274; font-size: 10px; font-weight: 800; letter-spacing: .12em; }
-.case-strip span:last-child { text-align: right; }
+.police-cordon { position: relative; height: 90px; overflow: hidden; pointer-events: none; }
+.police-tape { position: absolute; left: -8%; width: 116%; white-space: nowrap; padding: 3px 14px; color: #171709; background: repeating-linear-gradient(90deg, #ffffff08 0 2px, transparent 2px 5px), linear-gradient(180deg, #f9dd55, #e9c421 55%, #d6ac16); border-block: 1px solid #a58a26; box-shadow: 0 4px 9px #0009, inset 0 1px 1px #fff7; font-family: Impact, "Arial Narrow", sans-serif; font-size: 18px; font-weight: 900; line-height: 1.35; letter-spacing: .035em; }
+.tape-back { top: 30px; transform: rotate(6deg); filter: brightness(.8); }
+.tape-front { top: 32px; transform: rotate(-5deg); }
 section { padding: 0 clamp(18px, 5vw, 40px); }
-.intro { padding-top: 52px; padding-bottom: 40px; text-shadow: 0 2px 10px #000; }
+.intro { padding-top: 24px; padding-bottom: 40px; text-shadow: 0 2px 10px #000; }
 .tag { display: inline-block; color: var(--yellow); border: 1px solid #a79240; padding: 4px 9px; margin: 0 0 16px; }
 .intro h1 { font-size: clamp(30px, 7vw, 46px); line-height: 1.25; margin: 0 0 12px; letter-spacing: -.04em; word-break: keep-all; }
 .intro p:last-child { color: var(--muted); margin: 0; word-break: keep-all; }
