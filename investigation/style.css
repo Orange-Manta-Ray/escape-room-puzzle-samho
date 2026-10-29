@@ -81,3 +81,7 @@ footer { border-top: 1px solid #505047; padding: 20px clamp(18px, 5vw, 40px); di
 
 .photo-share { display: block; width: calc(100% - 24px); margin: 0 12px 8px; padding: 11px 14px; background: #f2cd36; color: #171717; font-size: 14px; line-height: 1.5; }
 .save-hint { margin: 0 12px 12px; color: #4f514b; font-size: 13px; line-height: 1.5; }
+
+.cover { position: relative; padding: 20px 18px 0; background: radial-gradient(ellipse at center, #38362d 0, #171717 68%); text-align: center; }
+.cover::after { content: ""; display: block; height: 3px; max-width: 480px; margin: -3px auto 0; position: relative; background: #e9c62f; }
+.cover img { display: block; width: 100%; max-width: 360px; height: auto; margin: 0 auto; box-shadow: 0 9px 28px #000a; }
