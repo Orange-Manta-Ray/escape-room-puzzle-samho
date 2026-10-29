@@ -22,7 +22,13 @@ function addEvidence(container, [filename, caption]) {
   link.append(image);
   const text = document.createElement('figcaption');
   text.textContent = caption + '  ·  눌러서 크게 보기 ↗';
-  figure.append(link, text);
+  const download = document.createElement('a');
+  download.href = link.href;
+  download.download = filename;
+  download.className = 'download';
+  download.textContent = '이미지 저장 ↓';
+  download.setAttribute('aria-label', `${caption} 이미지 저장`);
+  figure.append(link, text, download);
   container.append(figure);
 }
 if (!data) {
