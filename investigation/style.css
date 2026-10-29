@@ -78,3 +78,6 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
 .result .section-head span { color: var(--yellow); }
 footer { border-top: 1px solid #505047; padding: 20px clamp(18px, 5vw, 40px); display: flex; justify-content: space-between; gap: 12px; font-size: 10px; letter-spacing: .08em; color: #a5a599; font-weight: 700; }
 [hidden] { display: none !important; }
+
+.photo-share { display: block; width: calc(100% - 24px); margin: 0 12px 8px; padding: 11px 14px; background: #f2cd36; color: #171717; font-size: 14px; line-height: 1.5; }
+.save-hint { margin: 0 12px 12px; color: #4f514b; font-size: 13px; line-height: 1.5; }

@@ -28,7 +28,32 @@ function addEvidence(container, [filename, caption]) {
   download.className = 'download';
   download.textContent = '이미지 저장 ↓';
   download.setAttribute('aria-label', `${caption} 이미지 저장`);
-  figure.append(link, text, download);
+  const hint = document.createElement('p');
+  hint.className = 'save-hint';
+  hint.textContent = '사진첩에 저장하려면 사진을 길게 눌러 이미지 저장을 선택하세요.';
+  figure.append(link, text, download, hint);
+  if (navigator.share && navigator.canShare && window.isSecureContext) {
+    fetch(link.href).then((response) => {
+      if (!response.ok) throw new Error('Image unavailable');
+      return response.blob();
+    }).then((blob) => {
+      const file = new File([blob], filename, { type: blob.type });
+      const shareData = { files: [file] };
+      if (!navigator.canShare(shareData)) return;
+      const share = document.createElement('button');
+      share.type = 'button';
+      share.className = 'photo-share';
+      share.textContent = '사진첩에 저장';
+      share.setAttribute('aria-label', `${caption} 사진첩에 저장`);
+      share.addEventListener('click', () => {
+        navigator.share(shareData).catch((error) => {
+          if (error.name !== 'AbortError') hint.textContent = '사진을 길게 누른 뒤 이미지 저장을 선택하세요.';
+        });
+      });
+      figure.insertBefore(share, download);
+      hint.textContent = '사진첩에 저장을 누른 뒤 메뉴에서 이미지 저장을 선택하세요. 또는 사진을 길게 누르세요.';
+    }).catch(() => {});
+  }
   container.append(figure);
 }
 if (!data) {
