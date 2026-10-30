@@ -157,8 +157,8 @@ function addStage(index) {
   section.className = 'answer'; section.id = `stage-${index}`;
   const head = document.createElement('div'); head.className = 'section-head';
   const code = document.createElement('span'); code.textContent = `INVESTIGATION / ${String(index + 1).padStart(2, '0')}`;
-  const title = document.createElement('h2'); title.textContent = stage.additional ? '추가퀴즈' : '단서를 확인하세요';
-  head.append(code, title);
+  head.append(code);
+  if (stage.additional) { const title = document.createElement('h2'); title.textContent = '추가퀴즈'; head.append(title); }
   const question = document.createElement('p'); question.className = 'question'; question.textContent = stage.question;
   section.append(head, question);
   if (stage.hint) {

@@ -2,3 +2,5 @@
 .revealed-text { padding: 22px; border: 1px solid #b29c51; background: #151510ed; color: #f4df8f; font-size: 23px; font-weight: 700; line-height: 1.7; overflow-wrap: anywhere; }
 .stage-form button:disabled { background: #807647; color: #e1ddc9; cursor: default; }
 .stage-form input:disabled { background: #dcdcd2; color: #50564c; }
+
+.evidence-instruction { margin: 8px 0 14px; font-size: 19px; font-weight: 750; line-height: 1.5; word-break: keep-all; }

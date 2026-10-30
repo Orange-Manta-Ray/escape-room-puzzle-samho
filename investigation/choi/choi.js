@@ -62,8 +62,8 @@ const cases = {
     "title": "미로 속 위치",
     "intro": "예시 정답을 참고해 현재 위치를 찾아보세요.",
     "evidence": [
-      ["maze-question.png", "문제 · 미로"],
-      ["maze-example-answer.png", "예시 정답"]
+      ["maze-example-answer.png", "문제 정답 예시", "문제 정답 예시"],
+      ["maze-question.png", "문제 · 미로", "단서를 얻으려면 이 문제를 풀어서 좌표를 입력하세요."]
     ],
     "stages": [
       {
@@ -78,7 +78,8 @@ const cases = {
 const $ = (s) => document.querySelector(s);
 const id = new URLSearchParams(location.search).get('case');
 const data = cases[id];
-function addEvidence(container, [filename, caption]) {
+function addEvidence(container, [filename, caption, heading]) {
+  if (heading) { const text = document.createElement('p'); text.className = 'evidence-instruction'; text.textContent = heading; container.append(text); }
   const figure = document.createElement('figure');
   const link = document.createElement('a');
   link.href = `assets/${filename}`;
@@ -98,8 +99,8 @@ function addStage(index) {
   section.className = 'answer'; section.id = `stage-${index}`;
   const head = document.createElement('div'); head.className = 'section-head';
   const code = document.createElement('span'); code.textContent = `INVESTIGATION / ${String(index + 1).padStart(2, '0')}`;
-  const title = document.createElement('h2'); title.textContent = stage.additional ? '추가퀴즈' : '단서를 확인하세요';
-  head.append(code, title);
+  head.append(code);
+  if (stage.additional) { const title = document.createElement('h2'); title.textContent = '추가퀴즈'; head.append(title); }
   const question = document.createElement('p'); question.className = 'question'; question.textContent = stage.question;
   section.append(head, question);
   const form = document.createElement('form'); form.className = 'stage-form';
