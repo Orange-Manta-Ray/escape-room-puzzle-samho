@@ -170,6 +170,7 @@ function matchSongTitles(values, titles) {
   function match(index, remaining) {
     if (index === normalized.length) return true;
     return remaining.some((target, i) => {
+      if (target === '아하나님의은혜로' && !normalized[index].startsWith('아')) return false;
       const limit = target.length <= 2 ? 1 : target.length <= 6 ? 1 : 2;
       if (normalized[index].length < Math.max(2, target.length - limit)) return false;
       return editDistance(normalized[index], target) <= limit && match(index + 1, remaining.filter((_, j) => i !== j));
