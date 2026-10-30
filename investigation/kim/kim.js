@@ -119,8 +119,7 @@ const cases = {
       ]
     ],
     "stages": []
-  },
-  "8": {"title": "따뜻한 가을날의 일기", "intro": "일기에 남겨진 기록을 살펴보세요.", "evidence": [["autumn-diary.png", "따뜻한 가을날의 일기"]], "stages": []}
+  }
 };
 const $ = (s) => document.querySelector(s);
 const id = new URLSearchParams(location.search).get('case');
