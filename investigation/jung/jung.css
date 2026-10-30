@@ -4,3 +4,7 @@
 .stage-form input:disabled { background: #dcdcd2; color: #50564c; }
 
 .clue-hint { border-left: 2px solid #b29c51; padding: 8px 14px; color: #edd77c; background: #171713b8; margin: -6px 0 22px; }
+
+.praise-audio { display: block; width: 100%; margin: 0 0 24px; }
+.praise-fields { display: grid; gap: 10px; margin-bottom: 10px; }
+.praise-fields input { width: 100%; }
