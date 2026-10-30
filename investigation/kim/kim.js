@@ -84,17 +84,17 @@ const cases = {
   },
   "6": {
     "title": "숫자의 규칙",
-    "intro": "각 자릿수의 곱이 다음 숫자가 됩니다. 빈 네모의 값을 구하세요.",
+    "intro": "숫자 사이의 규칙을 찾아 빈 네모의 값을 구하세요.",
     "evidence": [
       [
-        "number-puzzle.svg",
+        "number-puzzle.svg?v=2",
         "문제 6 · 숫자 규칙"
       ]
     ],
     "stages": [
       {
         "question": "네모에 들어갈 값은?",
-        "answer": "72",
+        "answer": "73",
         "digits": 2,
         "results": [
           [
