@@ -60,9 +60,8 @@ const cases = {
   },
   "4": {
     "title": "미로 속 위치",
-    "intro": "예시 정답을 참고해 현재 위치를 찾아보세요.",
+    "intro": "미로에서 현재 위치를 찾아보세요.",
     "evidence": [
-      ["maze-example-answer.png", "문제 정답 예시", "문제 정답 예시"],
       ["maze-question.png", "문제 · 미로", "단서를 얻으려면 이 문제를 풀어서 좌표를 입력하세요."]
     ],
     "stages": [
