@@ -1,6 +1,6 @@
 const cases = {
   '1': { gate: { image: ['route-real.png', '확보된 자료 · 대피 경로'], answer: 'confidential' }, title: '지도에 남겨진 기록', intro: '흩어진 기록 속에서 다음 단서를 찾아보세요.', evidence: [['diary-1024.png', '문제 1-1 · 일기'], ['diary-0904.png', '문제 1-2 · 일기']], question: '일기는 날짜 순으로 봐야한다.', answer: '5122', numeric: true, result: ['navigation.png', '문제 1 정답 · 네비게이션 기록'] },
-  '2': { title: '확보된 사진', intro: '확보된 사진을 살펴보세요.', evidence: [['people-question.jpg', '확보된 사진']] },
+  '2': { title: '영수증 모음', intro: '현장에서 확보한 영수증을 자세히 살펴보세요.', evidence: [['receipts.png', '영수증 모음']] },
   '3': { title: '10월 27일의 지출', intro: '확보한 영수증에서 금액을 찾아보세요.', evidence: [], question: '10월 27일 조창현이 지출한 총 지출한 금액이 얼마더라..?', pendingAnswer: true, digits: 5, result: ['people-answer.png', '삼호 성도 리스트'] },
   '4': { title: '알파벳의 규칙', intro: '빈칸에 들어갈 알파벳을 찾아보세요.', evidence: [], question: 'O T T F  □  S S E N T', answer: 'f', ignoreCase: true, result: ['route.png', '확보된 자료 · 대피 경로'] },
   '5': { title: '열두 제자', intro: '그림과 열두 제자의 이름을 살펴보세요.', evidence: [['people-question.jpg', '문제 · 열두 제자']], question: '예수님이 첫 번째로 부르신 제자는 누구인가?', names: ['요한', '마태', '시몬 베드로', '빌립', '도마', '야고보', '바돌로매', '안드레', '시몬', '가룟 유다', '야고보', '유다'], answer: '안드레', results: [['suspicion.png', '의심 일기'], ['repentance.png', '회개 후 일기']] }
