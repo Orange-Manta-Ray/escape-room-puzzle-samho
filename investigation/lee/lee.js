@@ -38,7 +38,7 @@ const cases = {
   },
   "3": {
     "title": "십자가의 위치",
-    "intro": "기회는 한번.",
+    "intro": "기회는 두 번.",
     "evidence": [
       [
         "church.png",
@@ -47,10 +47,10 @@ const cases = {
     ],
     "stages": [
       {
-        "question": "삼호침례교회의 십자가는 본관 건물 어디에 있는가?\n오른쪽: 1\n왼쪽: 2\n가운데: 3\n본관에는 없고 입구에만 있다: 4\n기회는 1번입니다.",
+        "question": "삼호침례교회의 십자가는 본관 건물 어디에 있는가?\n오른쪽: 1\n왼쪽: 2\n가운데: 3\n본관에는 없고 입구에만 있다: 4\n기회는 2번입니다.",
         "answer": "1",
         "digits": 1,
-        "oneChance": true,
+        "attempts": 2,
         "results": [
           [
             "chat-1.jpeg",
@@ -86,7 +86,7 @@ const cases = {
         "question": "이창렬의 폰 비번은 그가 가장 좋아하는 말씀이야.. 신문에서 단서를 찾아 네자리 숫자를 쓰세요. (성경책 활용)",
         "answer": "0124",
         "digits": 4,
-        "results": []
+        "results": [["call.png", "정민석 통화 내역"]]
       }
     ]
   }
@@ -145,19 +145,21 @@ function addStage(index) {
   $('#stages').append(section);
   let solved = false;
   const chanceKey = `samho-lee-case-${id}-stage-${index}`;
-  if (stage.oneChance && localStorage.getItem(chanceKey) === 'wrong') { input.disabled = true; button.disabled = true; message.textContent = '기회를 이미 사용했습니다.'; message.classList.add('error'); }
+  const stored = stage.attempts ? localStorage.getItem(chanceKey) : null;
+  let failures = stored === 'wrong' ? 1 : Number(stored || 0);
+  if (stage.attempts && stored !== 'correct' && failures >= stage.attempts) { input.disabled = true; button.disabled = true; message.textContent = '기회 2번을 모두 사용했습니다.'; message.classList.add('error'); } else if (stage.attempts && failures === 1) { message.textContent = '남은 기회: 1번'; }
   form.addEventListener('submit', (event) => {
-    event.preventDefault(); if (solved || (stage.oneChance && localStorage.getItem(chanceKey) === 'wrong')) return;
+    event.preventDefault(); if (solved || (stage.attempts && failures >= stage.attempts)) return;
     let value = input.value.normalize('NFC').trim();
     if (!stage.answers) value = value.replace(/\s+/g, '');
     if (stage.ignoreCase) value = value.toLowerCase();
     if (!value) { message.textContent = '정답을 먼저 입력해 주세요.'; return; }
     if (!(stage.answers || [stage.answer]).includes(value)) {
-      if (stage.oneChance) { localStorage.setItem(chanceKey, 'wrong'); input.disabled = true; button.disabled = true; message.textContent = '정답이 아닙니다. 기회를 사용했습니다.'; message.classList.add('error'); return; }
+      if (stage.attempts) { failures++; localStorage.setItem(chanceKey, String(failures)); message.classList.add('error'); if (failures >= stage.attempts) { input.disabled = true; button.disabled = true; message.textContent = '정답이 아닙니다. 기회 2번을 모두 사용했습니다.'; } else { message.textContent = '정답이 아닙니다. 남은 기회: 1번'; } return; }
       message.textContent = value ? '정답이 아닙니다. 다시 확인해 주세요.' : '정답을 먼저 입력해 주세요.';
       message.classList.add('error'); return;
     }
-    solved = true; if (stage.oneChance) localStorage.setItem(chanceKey, 'correct'); input.disabled = true; button.disabled = true;
+    solved = true; if (stage.attempts) localStorage.setItem(chanceKey, 'correct'); input.disabled = true; button.disabled = true;
     message.classList.remove('error'); message.textContent = stage.results.length || data.stages[index + 1] ? '인증 완료. 아래 자료를 확인하세요.' : '정답입니다.';
     if (!stage.results.length && !stage.resultText && !data.stages[index + 1]) return;
     const result = document.createElement('section'); result.className = 'result'; result.id = `result-${index}`;
@@ -172,7 +174,7 @@ function addStage(index) {
     $('#stages').append(result); addStage(index + 1);
     result.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
-  if (stage.oneChance && localStorage.getItem(chanceKey) === 'correct') { input.value = stage.answer; form.requestSubmit(); }
+  if (stage.attempts && localStorage.getItem(chanceKey) === 'correct') { input.value = stage.answer; form.requestSubmit(); }
 }
 if (!data) {
   $('#title').textContent = '사건 자료를 찾을 수 없습니다';

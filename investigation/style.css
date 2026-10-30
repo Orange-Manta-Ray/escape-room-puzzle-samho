@@ -74,3 +74,6 @@ footer { border-top: 1px solid #505047; padding: 20px clamp(18px, 5vw, 40px); di
 [hidden] { display: none !important; }
 
 
+
+.lock { text-align: center; margin: 0 0 20px; }
+.lock img { width: min(100%, 340px); height: auto; }

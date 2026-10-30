@@ -1,9 +1,9 @@
 const cases = {
   '1': { gate: { image: ['route-real.png', '확보된 자료 · 대피 경로'], answer: 'confidential' }, title: '지도에 남겨진 기록', intro: '흩어진 기록 속에서 다음 단서를 찾아보세요.', evidence: [['diary-1024.png', '문제 1-1 · 일기'], ['diary-0904.png', '문제 1-2 · 일기']], question: '일기는 날짜 순으로 봐야한다.', answer: '5122', numeric: true, result: ['navigation.png', '문제 1 정답 · 네비게이션 기록'] },
-  '2': { title: '삼호 성도 리스트', intro: '성도 리스트를 살펴보고 질문에 답하세요.', evidence: [['people-question.jpg', '문제 2 · 삼호 성도 리스트']], question: '예수님이 가장 먼저 부르신 제자는 누구인가?', answer: '안드레', result: ['people-answer.png', '문제 2 정답 · 성도 리스트'] },
-  '3': { title: '영수증 모음', intro: '현장에서 확보한 영수증을 자세히 살펴보세요.', evidence: [['receipts.png', '증거 자료 · 영수증 모음']] },
-  '4': { title: '틀린 지도', intro: '아직 확인되지 않은 기록입니다.', evidence: [], question: '임시01', answer: '임시01', result: ['route.png', '확보된 자료 · 대피 경로'] },
-  '5': { title: '의심과 회개의 기록', intro: '두 일기에 남겨진 내용을 살펴보세요.', evidence: [['suspicion.png', '증거 자료 · 의심 일기'], ['repentance.png', '증거 자료 · 회개 후 일기']] }
+  '2': { title: '확보된 사진', intro: '확보된 사진을 살펴보세요.', evidence: [['people-question.jpg', '확보된 사진']] },
+  '3': { title: '10월 27일의 지출', intro: '확보한 영수증에서 금액을 찾아보세요.', evidence: [], question: '10월 27일 조창현이 지출한 총 지출한 금액이 얼마더라..?', pendingAnswer: true, digits: 5, result: ['people-answer.png', '삼호 성도 리스트'] },
+  '4': { title: '알파벳의 규칙', intro: '빈칸에 들어갈 알파벳을 찾아보세요.', evidence: [], question: 'O T T F  □  S S E N T', answer: 'f', ignoreCase: true, result: ['route.png', '확보된 자료 · 대피 경로'] },
+  '5': { title: '의심과 회개의 기록', intro: '두 일기에 남겨진 내용을 살펴보세요.', evidence: [['suspicion.png', '증거 자료 · 의심 일기'], ['repentance.png', '증거 자료 · 회개 후 일기']], question: '예수님이 가장 먼저 부르신 제자는 누구인가?', answer: '안드레', result: ['receipts.png', '영수증 모음'] }
 };
 const id = new URLSearchParams(location.search).get('case');
 const data = cases[id];
@@ -64,15 +64,19 @@ if (!data) {
 function renderPuzzle() {
   data.evidence.forEach((item) => addEvidence($('#evidence'), item));
   if (!data.evidence.length) $('#evidence-title').parentElement.parentElement.hidden = true;
-  if (data.answer) {
+  if (data.answer || data.pendingAnswer) {
     $('#answer-section').hidden = false;
     $('#question').textContent = data.question;
     const input = $('#answer-input');
-    input.placeholder = data.numeric ? '네 자리 숫자' : '정답을 입력하세요';
-    if (data.numeric) { input.inputMode = 'numeric'; input.maxLength = 4; input.pattern = '[0-9]*'; input.addEventListener('input', () => { input.value = input.value.replace(/[^0-9]/g, ''); }); }
+    const digits = data.digits || (data.numeric ? 4 : 0);
+    input.placeholder = digits ? `${digits}자리 숫자` : '정답을 입력하세요';
+    if (data.digits === 5) { const lock = document.createElement('div'); lock.className = 'lock'; const image = document.createElement('img'); image.src = 'assets/lock-5.svg'; image.alt = '5자리 숫자 자물쇠'; lock.append(image); $('#question').after(lock); }
+    if (data.pendingAnswer) { input.disabled = true; $('#form').querySelector('button').disabled = true; $('#message').textContent = '정답 확인 후 열립니다.'; }
+    if (digits) { input.inputMode = 'numeric'; input.maxLength = digits; input.pattern = '[0-9]*'; input.addEventListener('input', () => { input.value = input.value.replace(/[^0-9]/g, ''); }); }
     $('#form').addEventListener('submit', (event) => {
       event.preventDefault();
-      const value = input.value.normalize('NFC').replace(/\s+/g, '');
+      let value = input.value.normalize('NFC').replace(/\s+/g, '');
+      if (data.ignoreCase) value = value.toLowerCase();
       if (value === data.answer) {
         if ($('#result').hidden) addEvidence($('#result-evidence'), data.result);
         $('#result').hidden = false;
