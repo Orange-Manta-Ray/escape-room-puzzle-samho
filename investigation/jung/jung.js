@@ -90,7 +90,7 @@ const cases = {
     "stages": [
       {
         "question": "동시에 재생되는 세 찬양의 제목을 각각 입력하세요.",
-        "audio": "praise-mix.mp3",
+        "audio": "praise-mix-v2.mp3",
         "answers": ["지금은 엘리야 때처럼", "아 하나님의 은혜로", "밀알"],
         "results": [
           [
