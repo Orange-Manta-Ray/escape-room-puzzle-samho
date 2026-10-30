@@ -79,25 +79,20 @@ const cases = {
     ]
   },
   "7": {
-    "title": "윤철의 편지",
-    "intro": "편지에 남겨진 내용을 살펴보세요.",
-    "evidence": [
-      [
-        "letter.png",
-        "윤철 편지"
-      ]
-    ],
+    "title": "찬양과 가위바위보",
+    "intro": "세 찬양을 알아맞혀 숨겨진 기록을 찾아보세요.",
+    "evidence": [],
     "stages": [
       {
         "question": "동시에 재생되는 세 찬양의 제목을 각각 입력하세요.",
         "audio": "praise-mix-v3.mp3",
         "answers": ["지금은 엘리야 때처럼", "아 하나님의 은혜로", "밀알"],
-        "results": [
-          [
-            "dashboard.png",
-            "시스템 로그 대시보드"
-          ]
-        ]
+        "results": [["letter.png", "윤철 편지"]]
+      },
+      {
+        "question": "가위바위보에서 이기면 서버 로그를 볼 수 있습니다. 카운트다운 중에 하나를 선택하세요.",
+        "game": "rps",
+        "results": [["dashboard.png", "삼호교회 보안 시스템 로그 대시보드"]]
       }
     ]
   },
@@ -178,6 +173,50 @@ function matchSongTitles(values, titles) {
   }
   return match(0, targets);
 }
+function addRps(section, stage, index) {
+  const box = document.createElement('div'); box.className = 'rps-game';
+  const countdown = document.createElement('p'); countdown.className = 'rps-countdown'; countdown.textContent = '준비'; countdown.setAttribute('aria-live', 'polite');
+  const status = document.createElement('p'); status.className = 'rps-status'; status.textContent = '시작을 누르고 3초 안에 선택하세요.'; status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite');
+  const controls = document.createElement('div'); controls.className = 'rps-choices';
+  const names = ['가위', '바위', '보'];
+  const buttons = names.map((name) => { const button = document.createElement('button'); button.type = 'button'; button.textContent = name; button.disabled = true; button.setAttribute('aria-pressed', 'false'); controls.append(button); return button; });
+  const start = document.createElement('button'); start.type = 'button'; start.className = 'rps-start'; start.textContent = '가위바위보 시작';
+  box.append(countdown, status, controls, start); section.append(box); $('#stages').append(section);
+  let active = false, won = false, chosen = null, computer = 0, deadline = 0, timer = null;
+  function finish() {
+    if (!active) return;
+    active = false; clearInterval(timer); buttons.forEach((button) => { button.disabled = true; });
+    countdown.textContent = '끝';
+    if (chosen === null) { status.textContent = '시간이 지났어요. 다시 도전하세요.'; start.disabled = false; start.textContent = '다시 도전'; return; }
+    const outcome = (chosen - computer + 3) % 3;
+    const description = `나: ${names[chosen]} · 시스템: ${names[computer]}. `;
+    if (outcome !== 1) { status.textContent = description + (outcome === 0 ? '비겼어요. 다시 도전하세요.' : '졌어요. 다시 도전하세요.'); start.disabled = false; start.textContent = '다시 도전'; return; }
+    won = true; status.textContent = description + '이겼어요! 아래 서버 로그를 확인하세요.'; start.disabled = true;
+    const result = document.createElement('section'); result.className = 'result'; result.id = `result-${index}`;
+    const header = document.createElement('div'); header.className = 'section-head';
+    const stamp = document.createElement('span'); stamp.textContent = 'ACCESS GRANTED';
+    const heading = document.createElement('h2'); heading.textContent = '새로운 자료를 확보했습니다';
+    header.append(stamp, heading); result.append(header); stage.results.forEach((item) => addEvidence(result, item));
+    $('#stages').append(result); result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function tick() {
+    const remaining = deadline - Date.now();
+    if (remaining <= 0) { finish(); return; }
+    const value = String(Math.ceil(remaining / 1000)); if (countdown.textContent !== value) countdown.textContent = value;
+  }
+  start.addEventListener('click', () => {
+    if (active || won) return;
+    active = true; chosen = null; computer = Math.floor(Math.random() * names.length); deadline = Date.now() + 3000;
+    start.disabled = true; buttons.forEach((button) => { button.disabled = false; button.setAttribute('aria-pressed', 'false'); });
+    status.textContent = '가위, 바위, 보 중 하나를 선택하세요.'; tick(); timer = setInterval(tick, 100);
+  });
+  buttons.forEach((button, choice) => button.addEventListener('click', () => {
+    if (!active) return;
+    if (Date.now() >= deadline) { finish(); return; }
+    chosen = choice; buttons.forEach((item, i) => item.setAttribute('aria-pressed', String(i === choice)));
+    status.textContent = `${names[choice]} 선택! 카운트다운이 끝나면 결과가 나옵니다.`;
+  }));
+}
 function addStage(index) {
   const stage = data.stages[index];
   if (!stage) return;
@@ -189,6 +228,7 @@ function addStage(index) {
   if (stage.additional) { const title = document.createElement('h2'); title.textContent = '추가퀴즈'; head.append(title); }
   const question = document.createElement('p'); question.className = 'question'; question.textContent = stage.question;
   section.append(head, question);
+  if (stage.game === 'rps') { addRps(section, stage, index); return; }
   if (stage.audio) { const audio = document.createElement('audio'); audio.controls = true; audio.preload = 'metadata'; audio.src = `assets/${stage.audio}`; audio.setAttribute('aria-label', '세 찬양 동시 재생'); audio.className = 'praise-audio'; section.append(audio); }
   if (stage.hint) {
     const hint = document.createElement('p'); hint.className = 'clue-hint'; hint.textContent = `힌트: ${stage.hint}`; section.append(hint);
