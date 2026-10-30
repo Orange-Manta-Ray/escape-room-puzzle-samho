@@ -7,7 +7,7 @@ const cases = {
   '2': {
     title: '불출대장', intro: '불출대장 기록에 남겨진 숫자를 찾아 잠금을 차례로 해제하세요.', evidence: [],
     stages: [
-      { question: '홍도연 김희원 불출사유', answer: '0910', digits: 4, results: [['diary.png', '확보된 기록 · 홍도연 다이어리']] },
+      { question: '불출대장을 확인하세요', answer: '0910', digits: 4, results: [['diary.png', '확보된 기록 · 홍도연 다이어리']] },
       { question: '다이어리에 숨겨진 네 자리 숫자를 입력하세요.', answer: '4151', digits: 4, results: [['photo-1.png', '확보된 사진']] },
       { question: '예전 목원과 등산도 같이 갔엇구나! 근데 이 친구 생일이 언제였지? 어디에 쓰여져 있었는데...', answer: '100105', digits: 6, additional: true, results: [['photo-2.png', '추가 확보 사진']] }
     ]
