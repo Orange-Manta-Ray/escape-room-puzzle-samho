@@ -119,7 +119,8 @@ const cases = {
       ]
     ],
     "stages": []
-  }
+  },
+  "8": {"title": "교회 다녀온 하루의 기록", "intro": "하루의 기록을 살펴보세요.", "evidence": [["church-day.png", "교회 다녀온 하루의 기록"]], "stages": []}
 };
 const $ = (s) => document.querySelector(s);
 const id = new URLSearchParams(location.search).get('case');

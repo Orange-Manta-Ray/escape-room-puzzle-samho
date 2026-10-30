@@ -12,7 +12,8 @@ const cases = {
       { question: '도연의 예전 목원 생년월일은?', answer: '100105', digits: 6, additional: true, results: [['photo-2.png', '추가 확보 사진']] }
     ]
   },
-  '3': { title: '홍도연 인스타그램', intro: '사진과 기록 속에 남은 단서를 살펴보세요.', evidence: [['instagram.png', '홍도연 인스타그램']], stages: [] }
+  '3': { title: '홍도연 인스타그램', intro: '사진과 기록 속에 남은 단서를 살펴보세요.', evidence: [['instagram.png', '홍도연 인스타그램']], stages: [] },
+  '4': { title: '따뜻한 가을날의 일기', intro: '일기에 남겨진 기록을 살펴보세요.', evidence: [['autumn-diary.png', '따뜻한 가을날의 일기']], stages: [] }
 };
 const $ = (s) => document.querySelector(s);
 const id = new URLSearchParams(location.search).get('case');
