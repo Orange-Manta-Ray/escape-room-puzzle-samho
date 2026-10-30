@@ -59,18 +59,16 @@ const cases = {
     ]
   },
   "4": {
-    "title": "그림연상 성경퀴즈",
-    "intro": "그림 속 인물을 찾아 숨겨진 기록을 확인하세요.",
+    "title": "미로 속 위치",
+    "intro": "예시 정답을 참고해 현재 위치를 찾아보세요.",
     "evidence": [
-      [
-        "question-4.png",
-        "문제 4 · 그림연상 성경퀴즈"
-      ]
+      ["maze-question.png", "문제 · 미로"],
+      ["maze-example-answer.png", "예시 정답"]
     ],
     "stages": [
       {
-        "question": "그림이 가리키는 인물의 이름은?",
-        "answer": "아비가일",
+        "question": "지금 내가 서 있는곳이 어디지.? 아까 A1로 들어왔던거 같은데…",
+        "pendingAnswer": true,
         "results": [],
         "resultText": "그녀의 인스타 아이디는 abigaile_0524 이다."
       }
@@ -114,11 +112,12 @@ function addStage(index) {
   const message = document.createElement('p'); message.id = `message-${index}`; message.className = 'stage-message'; message.setAttribute('role', 'status'); message.setAttribute('aria-live', 'polite');
   message.textContent = '정답을 입력하고 확인을 눌러주세요.';
   input.setAttribute('aria-describedby', message.id);
+  if (stage.pendingAnswer) { input.disabled = true; button.disabled = true; message.textContent = '정답 확인 후 열립니다.'; }
   row.append(input, button); form.append(label, row, message); section.append(form);
   $('#stages').append(section);
   let solved = false;
   form.addEventListener('submit', (event) => {
-    event.preventDefault(); if (solved) return;
+    event.preventDefault(); if (solved || stage.pendingAnswer) return;
     const value = input.value.normalize('NFC').replace(/\s+/g, '');
     if (value !== stage.answer) {
       message.textContent = value ? '정답이 아닙니다. 다시 확인해 주세요.' : '정답을 먼저 입력해 주세요.';
