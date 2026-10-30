@@ -77,3 +77,6 @@ footer { border-top: 1px solid #505047; padding: 20px clamp(18px, 5vw, 40px); di
 
 .lock { text-align: center; margin: 0 0 20px; }
 .lock img { width: min(100%, 340px); height: auto; }
+
+.disciple-names { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; list-style: none; padding: 0; margin: 0 0 24px; }
+.disciple-names li { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 8px 3px; border: 1px solid #98864a; background: #151510ed; color: #f3f1e9; text-align: center; font-size: clamp(12px, 3.7vw, 16px); font-weight: 700; word-break: keep-all; }

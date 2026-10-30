@@ -3,7 +3,7 @@ const cases = {
   '2': { title: '확보된 사진', intro: '확보된 사진을 살펴보세요.', evidence: [['people-question.jpg', '확보된 사진']] },
   '3': { title: '10월 27일의 지출', intro: '확보한 영수증에서 금액을 찾아보세요.', evidence: [], question: '10월 27일 조창현이 지출한 총 지출한 금액이 얼마더라..?', pendingAnswer: true, digits: 5, result: ['people-answer.png', '삼호 성도 리스트'] },
   '4': { title: '알파벳의 규칙', intro: '빈칸에 들어갈 알파벳을 찾아보세요.', evidence: [], question: 'O T T F  □  S S E N T', answer: 'f', ignoreCase: true, result: ['route.png', '확보된 자료 · 대피 경로'] },
-  '5': { title: '의심과 회개의 기록', intro: '두 일기에 남겨진 내용을 살펴보세요.', evidence: [['suspicion.png', '증거 자료 · 의심 일기'], ['repentance.png', '증거 자료 · 회개 후 일기']], question: '예수님이 가장 먼저 부르신 제자는 누구인가?', answer: '안드레', result: ['receipts.png', '영수증 모음'] }
+  '5': { title: '열두 제자', intro: '그림과 열두 제자의 이름을 살펴보세요.', evidence: [['people-question.jpg', '문제 · 열두 제자']], question: '예수님이 첫 번째로 부르신 제자는 누구인가?', names: ['요한', '마태', '시몬 베드로', '빌립', '도마', '야고보', '바돌로매', '안드레', '시몬', '가룟 유다', '야고보', '유다'], answer: '안드레', results: [['suspicion.png', '의심 일기'], ['repentance.png', '회개 후 일기']] }
 };
 const id = new URLSearchParams(location.search).get('case');
 const data = cases[id];
@@ -67,6 +67,7 @@ function renderPuzzle() {
   if (data.answer || data.pendingAnswer) {
     $('#answer-section').hidden = false;
     $('#question').textContent = data.question;
+    if (data.names) { const list = document.createElement('ul'); list.className = 'disciple-names'; list.setAttribute('aria-label', '열두 제자 이름'); data.names.forEach((name) => { const item = document.createElement('li'); item.textContent = name; list.append(item); }); $('#question').after(list); }
     const input = $('#answer-input');
     const digits = data.digits || (data.numeric ? 4 : 0);
     input.placeholder = digits ? `${digits}자리 숫자` : '정답을 입력하세요';
@@ -78,7 +79,7 @@ function renderPuzzle() {
       let value = input.value.normalize('NFC').replace(/\s+/g, '');
       if (data.ignoreCase) value = value.toLowerCase();
       if (value === data.answer) {
-        if ($('#result').hidden) addEvidence($('#result-evidence'), data.result);
+        if ($('#result').hidden) (data.results || [data.result]).forEach((item) => addEvidence($('#result-evidence'), item));
         $('#result').hidden = false;
         $('#message').textContent = '인증 완료. 아래 자료를 확인하세요.';
         $('#message').classList.remove('error');
