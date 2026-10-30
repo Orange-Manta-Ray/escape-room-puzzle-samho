@@ -67,7 +67,8 @@ const cases = {
     "stages": [
       {
         "question": "지금 내가 서 있는곳이 어디지.? 아까 A1로 들어왔던거 같은데…",
-        "pendingAnswer": true,
+        "answer": "o16",
+        "ignoreCase": true,
         "results": [],
         "resultText": "그녀의 인스타 아이디는 abigaile_0524 이다."
       }
@@ -118,7 +119,8 @@ function addStage(index) {
   let solved = false;
   form.addEventListener('submit', (event) => {
     event.preventDefault(); if (solved || stage.pendingAnswer) return;
-    const value = input.value.normalize('NFC').replace(/\s+/g, '');
+    let value = input.value.normalize('NFC').replace(/\s+/g, '');
+    if (stage.ignoreCase) value = value.toLowerCase();
     if (value !== stage.answer) {
       message.textContent = value ? '정답이 아닙니다. 다시 확인해 주세요.' : '정답을 먼저 입력해 주세요.';
       message.classList.add('error'); return;
